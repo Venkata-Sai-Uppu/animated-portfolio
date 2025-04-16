@@ -49,7 +49,7 @@ function Navbar() {
   return (
     <nav className="fixed w-full bg-gray-900 bg-opacity-80 backdrop-blur z-50">
       <div className="container mx-auto p-4 flex justify-between items-center">
-        <span className="text-2xl font-bold text-white">VSPortfolio</span>
+        <span className="text-2xl font-bold text-white">Venkata Sai Uppu Portfolio</span>
         <div className="space-x-6 text-gray-300">
           {['About','Skills','Projects','Experience','Education','Contact'].map(sec => (
             <a href={`#${sec.toLowerCase()}`} className="hover:text-white" key={sec}>{sec}</a>
@@ -71,7 +71,6 @@ function Hero() {
       </motion.p>
       <div className="mt-8 flex space-x-4">
         <a href="#contact" className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold">Contact Me</a>
-        <a href="/resume.pdf" target="_blank" className="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg font-semibold">Download CV</a>
       </div>
     </section>
   );
@@ -113,10 +112,6 @@ function Projects() {
             <Legend verticalAlign="bottom" />
           </PieChart>
         </ResponsiveContainer>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <img src="https://unsplash.com/photos/person-using-macbook-pro-on-black-table-eveI7MOcSmw" alt="Analytics Dashboard" className="rounded-lg shadow-lg" />
-          <img src="https://unsplash.com/photos/group-of-business-people-working-together-on-new-project-with-planning-analytical-report-at-meeting-mJaU7WQDnvE" alt="Data Visualization" className="rounded-lg shadow-lg" />
-        </div>
       </div>
     </section>
   );
