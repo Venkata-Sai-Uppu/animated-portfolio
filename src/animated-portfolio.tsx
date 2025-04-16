@@ -6,7 +6,6 @@ import {
   RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar,
   ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend
 } from 'recharts';
-
 // Data
 const skillsData = [
   { skill: 'Python', value: 90 },
