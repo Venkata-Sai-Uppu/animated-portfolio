@@ -6,9 +6,7 @@ import {
   PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, CartesianGrid
 } from 'recharts';
-import Nav from './components/Nav'; // optional: your sticky navbar
-import DataImg1 from './assets/data-visual-1.png';
-import DataImg2 from './assets/data-visual-2.png';
+
 
 const skillsData = [
   { subject: 'Python', A: 90 },
