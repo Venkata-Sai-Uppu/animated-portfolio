@@ -1,219 +1,236 @@
-// src/App.jsx
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import {
-  Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
-  PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
-  BarChart, Bar, XAxis, YAxis, CartesianGrid
+import { 
+  RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar,
+  PieChart, Pie, Cell,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  ResponsiveContainer,
+  AreaChart, Area
 } from 'recharts';
 
-
+// Sample data
 const skillsData = [
-  { subject: 'Python', A: 90 },
-  { subject: 'JavaScript', A: 85 },
-  { subject: 'SQL', A: 80 },
-  { subject: 'React', A: 85 },
-  { subject: 'Node.js', A: 75 },
-  { subject: 'Tableau', A: 85 },
-  { subject: 'Power BI', A: 80 },
-  { subject: 'ML', A: 82 },
+  { skill: 'Python', value: 90 },
+  { skill: 'JavaScript', value: 85 },
+  { skill: 'SQL', value: 80 },
+  { skill: 'React', value: 88 },
+  { skill: 'Tableau', value: 92 },
+  { skill: 'Power BI', value: 87 },
+  { skill: 'Machine Learning', value: 85 }
 ];
-
 const projectImpactData = [
-  { name: 'Customer Sat.', value: 30 },
-  { name: 'Pred. Acc.',    value: 25 },
-  { name: 'ETL Eff.',      value: 45 },
+  { name: 'Customer Satisfaction', value: 30 },
+  { name: 'Prediction Accuracy', value: 25 },
+  { name: 'ETL Efficiency', value: 45 }
 ];
-
 const experienceImpact = [
-  { name: 'ETL & Prep',   value: 30 },
-  { name: 'Model Acc.',   value: 15 },
-  { name: 'Viz Impact',   value: 20 },
-  { name: 'Automation',   value: 35 },
+  { name: 'ETL & Preprocessing', value: 30 },
+  { name: 'Model Accuracy', value: 20 },
+  { name: 'Visualization Impact', value: 25 },
+  { name: 'Automation Efficiency', value: 35 }
 ];
+const areaData = [
+  { month: 'Jan', value: 65 },
+  { month: 'Feb', value: 72 },
+  { month: 'Mar', value: 80 },
+  { month: 'Apr', value: 85 },
+  { month: 'May', value: 90 },
+  { month: 'Jun', value: 95 }
+];
+const timelineData = [
+  { year: 'Jun 2024 – Jan 2025', role: '🔥 Data Scientist – Navasal', desc: 'Engineered end-to-end ETL pipelines in Spark (+30% efficiency), deployed scalable ML models in SageMaker, and slashed prediction error by 20% with Optuna.' },
+  { year: 'Jan 2024 – Nov 2024', role: '🚀 Data Analyst – University of Cincinnati', desc: 'Architected interactive dashboards in Tableau & Python, defined KPIs to boost project outcomes by 13%, and drove data-driven strategies.' },
+  { year: 'Jun 2022 – Jul 2023', role: '💡 Data Analyst – L&T Mind Tree', desc: 'Analyzed 1M+ records to fuel decision-making (+25% project efficiency) and delivered 10+ high-fidelity dashboards.' }
+];
+const COLORS = ['#4F46E5', '#10B981', '#F59E0B', '#EF4444', '#3B82F6'];
 
-const COLORS = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728'];
-
-export default function App() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => void setMounted(true), []);
-
+// Components
+function Navbar() {
   return (
-    <div className="bg-gray-900 text-gray-100 min-h-screen font-sans">
-      {/* NAVBAR */}
-      <Nav />
+    <nav className="fixed w-full bg-gray-900 bg-opacity-80 backdrop-blur z-50">
+      <div className="container mx-auto p-4 flex justify-between items-center">
+        <span className="text-2xl font-bold text-white">VSPortfolio</span>
+        <div className="space-x-6 text-gray-300">
+          {['About','Skills','Projects','Experience','Education','Contact'].map(sec => (
+            <a href={`#${sec.toLowerCase()}`} className="hover:text-white" key={sec}>{sec}</a>
+          ))}
+        </div>
+      </div>
+    </nav>
+  );
+}
 
-      {/* HERO */}
-      <header className="pt-24 text-center px-4">
-        <motion.h1
-          initial={{ y: -50, opacity: 0 }}
-          animate={mounted ? { y: 0, opacity: 1 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-5xl font-extrabold mb-4"
-        >
-          Venkata Sai Uppu
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={mounted ? { opacity: 1 } : {}}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-xl text-gray-300"
-        >
-          Data Analyst & Scientist | MS Information Technology, UC • GPA 4.0
-        </motion.p>
-      </header>
+function Hero() {
+  return (
+    <section id="about" className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-800 via-gray-900 to-black text-center px-6">
+      <motion.h1 initial={{ opacity: 0, scale:0.8 }} animate={{ opacity: 1, scale:1 }} transition={{ duration: 1 }} className="text-6xl font-extrabold text-white mb-4">
+        Venkata Sai Uppu
+      </motion.h1>
+      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-xl text-gray-400 max-w-2xl">
+        Data Analyst & Data Scientist with 3+ years driving insights, automating workflows, and crafting scalable ML solutions. Let’s build data-driven success! 🏆
+      </motion.p>
+      <div className="mt-8 flex space-x-4">
+        <a href="#contact" className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold">Contact Me</a>
+        <a href="/resume.pdf" target="_blank" className="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg font-semibold">Download CV</a>
+      </div>
+    </section>
+  );
+}
 
-      <main className="space-y-32 py-16">
+function Skills() {
+  return (
+    <section id="skills" className="py-20 bg-gray-900">
+      <div className="container mx-auto">
+        <h2 className="text-4xl font-bold text-white text-center mb-8">Skills Mastery</h2>
+        <ResponsiveContainer width="100%" height={350}>
+          <RadarChart data={skillsData} outerRadius={140}>
+            <PolarGrid stroke="#374151" />
+            <PolarAngleAxis dataKey="skill" stroke="#9CA3AF" />
+            <PolarRadiusAxis angle={30} domain={[0,100]} />
+            <Radar name="Proficiency" dataKey="value" stroke="#4F46E5" fill="#4F46E5" fillOpacity={0.6} />
+            <Legend verticalAlign="top" iconType="circle" />
+            <Tooltip />
+          </RadarChart>
+        </ResponsiveContainer>
+      </div>
+    </section>
+  );
+}
 
-        {/* SKILLS RADAR */}
-        <section id="skills" className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-6 text-center">Skills Snapshot</h2>
-          <div className="w-full h-96">
-            <ResponsiveContainer>
-              <RadarChart cx="50%" cy="50%" outerRadius="80%" data={skillsData}>
-                <PolarGrid />
-                <PolarAngleAxis dataKey="subject" stroke="#aaa" />
-                <PolarRadiusAxis angle={30} domain={[0,100]} />
-                <Radar name="Proficiency" dataKey="A" stroke="#ff7f0e" fill="#ff7f0e" fillOpacity={0.6} />
-                <Legend />
-              </RadarChart>
-            </ResponsiveContainer>
-          </div>
-        </section>
+function Projects() {
+  return (
+    <section id="projects" className="py-20 bg-gray-800">
+      <div className="container mx-auto">
+        <h2 className="text-4xl font-bold text-white text-center mb-12">Project Showcase</h2>
+        <ResponsiveContainer width="100%" height={350}>
+          <PieChart>
+            <Pie data={projectImpactData} cx="50%" cy="50%" innerRadius={60} outerRadius={120} fill="#10B981" dataKey="value" label>
+              {projectImpactData.map((entry, idx) => (
+                <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend verticalAlign="bottom" />
+          </PieChart>
+        </ResponsiveContainer>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <img src="https://unsplash.com/photos/person-using-macbook-pro-on-black-table-eveI7MOcSmw" alt="Analytics Dashboard" className="rounded-lg shadow-lg" />
+          <img src="https://unsplash.com/photos/group-of-business-people-working-together-on-new-project-with-planning-analytical-report-at-meeting-mJaU7WQDnvE" alt="Data Visualization" className="rounded-lg shadow-lg" />
+        </div>
+      </div>
+    </section>
+  );
+}
 
-        {/* PROJECTS WITH IMAGES + PIE */}
-        <section id="projects" className="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold">Key Projects</h2>
-            <p className="text-gray-300">
-              • Customer Segmentation Analysis: ↑30% satisfaction via K-Means & insights.  
-              <br/>
-              • Business Trade Analytics: Python + Matplotlib tools driving actionable financial insights.  
-              <br/>
-              • Heart Disease Prediction: RF + SVM tuned with GA/PSO, achieving 90% accuracy.
-            </p>
-            <div className="flex gap-4">
-              <img src={DataImg1} alt="Customer Segmentation Visualization" className="w-1/2 rounded shadow-lg" />
-              <img src={DataImg2} alt="Trade Analytics Chart" className="w-1/2 rounded shadow-lg" />
-            </div>
-          </div>
-          <div className="w-full h-96 bg-gray-800 rounded-lg shadow-inner p-6">
-            <h3 className="text-2xl font-semibold mb-4 text-white">Project Impact Breakdown</h3>
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie
-                  data={projectImpactData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  fill="#2ca02c"
-                  dataKey="value"
-                  label
-                >
-                  {projectImpactData.map((_, idx) => (
-                    <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-                <Legend verticalAlign="bottom" />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </section>
-
-        {/* EXPERIENCE BAR */}
-        <section id="experience" className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-6 text-center">Experience Highlights</h2>
-          <div className="bg-gray-800 rounded-lg p-8 mb-12 space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold">Data Scientist – Navasal</h3>
-              <ul className="mt-2 list-disc list-inside text-gray-300">
-                <li>ETL pipelines in Spark: +30% throughput & +15% accuracy</li>
-                <li>Deployed ML models on SageMaker; reduced error 20%, sped inference 25%</li>
-                <li>Hyperparameter tuning with Optuna for top-tier model performance</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold">Data Analyst – University of Cincinnati</h3>
-              <ul className="mt-2 list-disc list-inside text-gray-300">
-                <li>Designed interactive dashboards: 13% KPI improvement</li>
-                <li>Led cross-functional teams to define & track key metrics</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold">Data Analyst – L&T Mind Tree</h3>
-              <ul className="mt-2 list-disc list-inside text-gray-300">
-                <li>Analyzed 1M+ records, boosting efficiency 25%</li>
-                <li>Built 10+ dashboards in Tableau to monitor critical KPIs</li>
-              </ul>
-            </div>
-          </div>
-          <div className="w-full h-80">
-            <ResponsiveContainer>
-              <BarChart data={experienceImpact} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                <XAxis dataKey="name" stroke="#aaa" />
-                <YAxis stroke="#aaa" />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="value" fill="#d62728" radius={[4,4,0,0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </section>
-
-        {/* EDUCATION */}
-        <section id="education" className="max-w-3xl mx-auto px-4 space-y-6">
-          <h2 className="text-3xl font-bold mb-4 text-center">Academic Credentials</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-800 rounded-lg p-6">
-              <h3 className="text-xl font-semibold">M.S. Information Technology</h3>
-              <p className="text-gray-400 mt-2">University of Cincinnati • Track: Cybersecurity, Data Analytics • GPA: 4.0</p>
-            </div>
-            <div className="bg-gray-800 rounded-lg p-6">
-              <h3 className="text-xl font-semibold">B.S. Computer Science</h3>
-              <p className="text-gray-400 mt-2">VR Siddhartha • Focus: Database Management & Security • GPA: 3.4</p>
-            </div>
-          </div>
-        </section>
-
-        {/* CONTACT */}
-        <section id="contact" className="max-w-md mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-4 text-center">Get In Touch</h2>
-          <form className="bg-gray-800 p-6 rounded-lg space-y-4">
-            <input
-              type="text"
-              placeholder="Name"
-              className="w-full p-3 rounded bg-gray-700 text-white focus:outline-none"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full p-3 rounded bg-gray-700 text-white focus:outline-none"
-            />
-            <textarea
-              rows="4"
-              placeholder="Your message"
-              className="w-full p-3 rounded bg-gray-700 text-white focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="w-full py-3 bg-blue-600 hover:bg-blue-700 rounded text-white font-semibold transition"
+function Experience() {
+  return (
+    <section id="experience" className="py-20 bg-gray-900">
+      <div className="container mx-auto">
+        <h2 className="text-4xl font-bold text-white text-center mb-12">Professional Journey</h2>
+        <ResponsiveContainer width="100%" height={350}>
+          <BarChart data={experienceImpact} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <CartesianGrid stroke="#374151" />
+            <XAxis dataKey="name" stroke="#9CA3AF" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="value" fill="#F59E0B" barSize={20} radius={[10,10,0,0]} />
+          </BarChart>
+        </ResponsiveContainer>
+        <div className="mt-16 space-y-10">
+          {timelineData.map(({year, role, desc}, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.3, duration: 0.6 }}
+              className="bg-gray-700 p-8 rounded-lg shadow-lg text-gray-200"
             >
-              Send Message
-            </button>
-          </form>
-        </section>
+              <h3 className="text-2xl font-semibold">{role}</h3>
+              <span className="text-sm text-gray-400">{year}</span>
+              <p className="mt-4 text-gray-300">{desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-      </main>
+function Education() {
+  return (
+    <section id="education" className="py-20 bg-gray-800">
+      <div className="container mx-auto max-w-3xl">
+        <h2 className="text-4xl font-bold text-white text-center mb-8">Academic Credentials</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-gray-700 p-6 rounded-lg shadow-lg text-gray-200">
+            <h3 className="text-2xl font-semibold">M.S. in Information Technology</h3>
+            <p className="mt-2 text-gray-400">University of Cincinnati</p>
+            <p className="mt-1">Track: Cybersecurity, Data Analytics</p>
+            <p className="mt-1">GPA: 4.0</p>
+          </div>
+          <div className="bg-gray-700 p-6 rounded-lg shadow-lg text-gray-200">
+            <h3 className="text-2xl font-semibold">B.S. in Computer Science</h3>
+            <p className="mt-2 text-gray-400">VR Siddhartha, India</p>
+            <p className="mt-1">Concentration: Database Management & Data Security</p>
+            <p className="mt-1">GPA: 3.4</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-      <footer className="bg-gray-800 text-gray-400 py-6 text-center">
-        © 2024 Venkata Sai Uppu • 
-        <a href="mailto:venkatasaiuppu9@gmail.com" className="underline ml-2">venkatasaiuppu9@gmail.com</a> • 
-        <a href="https://github.com/Venkata-Sai-Uppu" className="underline mx-2">GitHub</a>
-        <a href="https://linkedin.com/in/venkata-sai-uppu" className="underline">LinkedIn</a>
-      </footer>
+function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  return (
+    <section id="contact" className="py-20 bg-gray-900">
+      <div className="container mx-auto max-w-lg">
+        <h2 className="text-4xl font-bold text-white text-center mb-8">Let’s Connect</h2>
+        <form className="space-y-6">
+          {['name','email','message'].map(field => (
+            <div key={field}>
+              <label htmlFor={field} className="block text-gray-300 mb-2 capitalize">{field}</label>
+              {field === 'message' ? (
+                <textarea id={field} rows={4}
+                  onChange={e => setForm({...form, [field]: e.target.value})}
+                  className="w-full p-3 rounded bg-gray-700 text-gray-200" />
+              ) : (
+                <input id={field} type={field==='email'?'email':'text'}
+                  onChange={e => setForm({...form, [field]: e.target.value})}
+                  className="w-full p-3 rounded bg-gray-700 text-gray-200" />
+              )}
+            </div>
+          ))}
+          <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded text-white font-semibold">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="bg-gray-900 py-6 text-center text-gray-500">
+      <p>© 2024 Venkata Sai Uppu | Cincinnati, OH | +1 (513) 410-8634</p>
+    </footer>
+  );
+}
+
+// Main App
+export default function App() {
+  return (
+    <div className="bg-gray-900 text-gray-100">
+      <Navbar />
+      <Hero />
+      <Skills />
+      <Projects />
+      <Experience />
+      <Education />
+      <Contact />
+      <Footer />
     </div>
   );
 }
