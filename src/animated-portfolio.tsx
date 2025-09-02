@@ -83,7 +83,7 @@ function Hero() {
         Venkata Sai Uppu
       </motion.h1>
       <motion.p initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="text-xl md:text-2xl text-gray-400 max-w-3xl mb-8">
-        Data Scientist & Data Engineer with **4+ years** of experience designing scalable data pipelines, automating ETL workflows, and delivering actionable business insights.
+        Data Scientist & Data Engineer with 4+ years of experience designing scalable data pipelines, automating ETL workflows, and delivering actionable business insights.
       </motion.p>
       <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.4 }} className="flex space-x-4">
         <a href="#contact" className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-semibold transition-transform transform hover:scale-105">Get in Touch</a>
@@ -102,12 +102,12 @@ function Skills() {
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
             <h3 className="text-2xl font-bold text-white mb-4">Core Competencies</h3>
             <ul className="space-y-2 text-lg text-gray-300 list-disc list-inside">
-              <li>**Data Engineering & ETL:** SQL, Azure Data Factory, Databricks, Apache Spark, Snowflake</li>
-              <li>**Programming:** Python (pandas, numpy, Flask/FastAPI), R, SQL scripting</li>
-              <li>**Cloud Platforms:** Microsoft Azure (Data Lake, Synapse Analytics, DevOps)</li>
-              <li>**GIS & Geospatial:** ESRI ArcGIS Pro, ArcPy, ArcGIS API for Python</li>
-              <li>**ML & Statistics:** A/B Testing, Causal Inference, Regression Analysis, Experimental Design</li>
-              <li>**Visualization:** Power BI, Tableau, ArcGIS Dashboards</li>
+              <li>Data Engineering & ETL: SQL, Azure Data Factory, Databricks, Apache Spark, Snowflake</li>
+              <li>Programming: Python (pandas, numpy, Flask/FastAPI), R, SQL scripting</li>
+              <li>Cloud Platforms: Microsoft Azure (Data Lake, Synapse Analytics, DevOps)</li>
+              <li>GIS & Geospatial: ESRI ArcGIS Pro, ArcPy, ArcGIS API for Python</li>
+              <li>ML & Statistics: A/B Testing, Causal Inference, Regression Analysis, Experimental Design</li>
+              <li>Visualization: Power BI, Tableau, ArcGIS Dashboards</li>
             </ul>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
@@ -169,8 +169,8 @@ function Education() {
           <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true, amount: 0.5 }} className="bg-gray-800 p-8 rounded-lg shadow-lg text-gray-200 border border-gray-700">
             <h3 className="text-2xl font-semibold text-white">Master’s in Information Technology</h3>
             <p className="mt-2 text-gray-400">University of Cincinnati, USA</p>
-            <p className="mt-1 text-gray-500">Aug 2023 - May 2025</p>
-            <p className="mt-4 text-gray-300">**Project: LLM-Powered Legal Document QA System**</p>
+            <p className="mt-1 text-gray-500">Aug 2023 - Dec 2024</p>
+            <p className="mt-4 text-gray-300">Project: LLM-Powered Legal Document QA System</p>
             <ul className="mt-2 text-gray-400 list-disc list-inside">
               <li>Built a GenAI chatbot using Llama-2 and LangChain.</li>
               <li>Utilized FAISS for document vector indexing and retrieval.</li>
@@ -178,10 +178,17 @@ function Education() {
             </ul>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true, amount: 0.5 }} className="bg-gray-800 p-8 rounded-lg shadow-lg text-gray-200 border border-gray-700">
-            <h3 className="text-2xl font-semibold text-white">Bachelor's Degree</h3>
-            <p className="mt-2 text-gray-400">Bangalore, India</p>
-            <p className="mt-1 text-gray-500">Oct 2022 - Jul 2023</p>
-            <p className="mt-4 text-gray-300">*(Note: The resume only provides data for the master's degree. This is a placeholder section to make the layout consistent.)*</p>
+            <h3 className="text-2xl font-semibold text-white">Bachelor's Degree in Computer Science</h3>
+            <p className="mt-2 text-gray-400">Vijayawada, India</p>
+            <p className="mt-1 text-gray-500">Jun 2019 - May 2023</p>
+            <p className="mt-4 text-gray-300"> Project: Retail Demand Forecasting</p>
+             <ul className="mt-2 text-gray-400 list-disc list-inside">
+              <li>Developed forecasting model at store-SKU level using Python (Prophet + XGBoost) to predict sales demand and optimize allocation.
+</li>
+              <li>Implemented pipeline on Databricks + Snowflake with automated monitoring of forecast accuracy.
+</li>
+              <li>Created interactive dashboards in Power BI to present results to stakeholders.</li>
+            </ul>
           </motion.div>
         </div>
       </div>
